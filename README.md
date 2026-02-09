@@ -1,55 +1,62 @@
-# Dynamox Developer Challenges
+# Quiz Application - Kotlin Multiplatform
 
-## About Dynamox
+Aplicação de quiz multiplataforma (Android/iOS) desenvolvida com **Kotlin Multiplatform** seguindo princípios de **Clean Architecture**, **Domain-Driven Design (DDD)** e **Test-Driven Development (TDD)**.
 
-[Dynamox](https://dynamox.net/) is a high-tech firm specializing in vibration analysis and industrial asset condition monitoring. Our expert team develops comprehensive hardware and software solutions, encompassing firmware, mobile applications (Android and iOS), and full-stack cloud native applications. 
+## Objetivo
 
-With our proficiency in signal processing for vibration and acoustics, we deliver advanced and precise monitoring systems. We are committed to optimizing operational efficiency and facilitating proactive maintenance through our innovative technology and integrated solutions.
+Resposta ao desafio técnico Dynamox:
+- Quiz com 10 perguntas de múltipla escolha
+- Sistema de pontuação e histórico
+- Múltiplos jogadores
+- Persistência de sessão (retomar quiz em andamento)
+- Interface Android (obrigatório) e iOS (bonus)
 
-## Positions
+## Abordagem
 
-We are looking for developers who are passionate about learning, growing, and contributing to our team. You will play a key role in our development efforts, working on a variety of projects and collaborating with different teams to build and improve our solutions.
+### TDD
 
-We value flexibility and collaboration, hence we provide opportunities for you to lend your skills to other teams when required. Join us on this exciting journey as we revolutionize our digital platforms. Currently we are particularly interested in individuals who can identify with one of the following role descriptions:
+Todo código é desenvolvido test-first, seguindo o ciclo red-green-refactor.
 
-### Junior Software Developer
+### Arquitetura
 
-With limited experience, assists in coding, testing, and stabilizing systems under supervision. Communicates with immediate team members and solves straightforward problems with guidance. Should display a willingness to learn and grow professionally. This is an individual contributor role.
+```
+┌─────────────────────────┐
+│     UI (Compose)        │  ← Android/iOS
+├─────────────────────────┤
+│   Use Cases             │  ← Orquestração
+├─────────────────────────┤
+│   Domain (Core)         │  ← Regras de negócio
+├─────────────────────────┤
+│   Infrastructure        │  ← API, DB, etc
+└─────────────────────────┘
+```
 
-### Mid-level Software Developer
+Dependências apontam para dentro. Core não conhece frameworks.
 
-With a certain level of proven experience, contributes to software development, solves moderate problems, and starts handling ambiguous situations with minimal guidance. Communicates with the broader team and engages in code reviews and documentation. This role also includes supporting junior engineers and commitment to continuous learning. This is an individual contributor role.
+## Estrutura
 
-### Senior-level Software Developer
+```
+src/
+├── commonMain/kotlin/org/kaelkill/quiz/
+│   └── domain/              # Core
+├── commonTest/kotlin/org/kaelkill/quiz/
+│   └── domain/              # Testes
+├── androidMain/             # Android
+└── iosMain/                 # iOS
+```
 
-With vast experience, enhances software development, leading complex system development and ambiguous situation handling. Tackles intricate problems and mentors junior and mid-level engineers. Champions coding standards, project strategy, and technology adoption. Communicates across teams, influencing technical and non-technical stakeholders. This individual contributor role blends technical expertise with leadership, focusing on innovation, mentorship, and strategic contributions to the development process.
+## Executar
 
-## Challenges Full-Stack
+### Testes
+```bash
+./gradlew test
+```
 
-- [ ] [01 - Dynamox Full-Stack Node.js React Developer Challenge](./full-stack-challenge.md)
-- [ ] [02 - Dynamox Full-Stack C# React Developer Challenge](./full-stack-csharp-react-challenge.md) 
-  
-## Challenges Front-End
+### Android
+```bash
+./gradlew installDebug
+```
 
-- [ ] [01 - Dynamox Front-end React Developer Challenge Marketing Teams](./front-end-challenge-v1.md)
-- [ ] [02 - Dynamox Front-end React Developer Challenge Product Teams](./front-end-challenge-v2.md)
+## Documentação
 
-## Challenges DevOps
-
-- [ ] [01 - Dynamox DevOps Developer Challenge Foundation Teams](./dev-sec-fin-ops-challenge-v1/README.md)
-
-## Challenges Mobile
-
-- [ ] [01 - Dynamox Kotlin Multiplatform Developer Challenge](./kotlin-multiplatform-challenge.md)
-- [ ] [02 - Dynamox Android Developer Challenge](./android-challenge.md)
-- [ ] [03 - Dynamox iOS Developer Challenge](./ios-challenge.md)
-
-## Challenge Back-End
-- [ ] [01 - Dynamox Back-End Time Series ](./back-end-challenge-v1.md)
-
-## Challenge QA
-- [ ] [01- Dynamox QA Challenge](./qa-challenge.md)
-
-</br>
-
-**Good luck! We look forward to reviewing your submission.** 🚀
+- [DOMAIN_MODEL.md](docs/DOMAIN_MODEL.md) — Modelagem do domínio
